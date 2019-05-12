@@ -5,6 +5,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -60,5 +62,12 @@ public class PostsListActivity extends AppCompatActivity {
 
         //set adapter to recycleradapter
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+        return true;
     }
 }

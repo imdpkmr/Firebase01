@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Firebase01</string>
+    <string name="search_title">Search Menu</string>
 </resources>
