@@ -9,7 +9,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -71,12 +73,25 @@ public class PostsListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
         inflater.inflate(R.menu.options_menu, menu);
+        inflater.inflate(R.menu.main_menu,menu);
 
         //Associate searchable configuration with the SearchView
         SearchManager searchManager=(SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView=(SearchView)menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.settings){
+            Toast.makeText(this,"You clicked SETTINGS, settings is on the way please wait",Toast.LENGTH_LONG).show();
+        }else if(item.getItemId()==R.id.help){
+            Toast.makeText(this,"Help is on the way, please wait.",Toast.LENGTH_SHORT).show();
+        }else{
+            return super.onOptionsItemSelected(item);
+        }
         return true;
     }
 }
