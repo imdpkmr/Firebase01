@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="#fff"
-    app:cardCornerRadius="3dp"
-    app:cardElevation="3dp"
-    app:contentPadding="5dp"
+    app:cardBackgroundColor="@color/cardBgColor"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="5dp"
+    app:contentPadding="10dp"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -18,7 +18,10 @@
             android:id="@+id/rtvTitle"
             android:text="Title"
             android:textColor="#000"
+            android:textSize="30dp"
+            android:textAlignment="center"
             android:textStyle="bold"
+            android:paddingBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
