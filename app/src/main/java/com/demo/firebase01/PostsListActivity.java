@@ -2,7 +2,11 @@ package com.demo.firebase01;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,7 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 * 2. Realtime Database
 * It will contain JSON of data to be retrieved Recycler View. The data contains title, image(url), description*/
 
-public class PostsListActivity extends AppCompatActivity {
+public class PostsListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
@@ -54,11 +58,14 @@ public class PostsListActivity extends AppCompatActivity {
         mFirebaseDatabase=FirebaseDatabase.getInstance();
         mDatabaseRef=mFirebaseDatabase.getReference("Data");
 
+        //navigation drawer layout
         mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer);
         mToggle=new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //calling method to set onclicklistener for navigation drawer
+        setNavigationViewListener();
    }
    //load data into recycler view adapter
     @Override
@@ -97,6 +104,9 @@ public class PostsListActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if(mToggle.onOptionsItemSelected(item)){
+            return true;
+        }
         if(item.getItemId()==R.id.settings){
             Toast.makeText(this,"You clicked SETTINGS, settings is on the way please wait",Toast.LENGTH_LONG).show();
         }else if(item.getItemId()==R.id.help){
@@ -105,5 +115,45 @@ public class PostsListActivity extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        //handle navigation item clicks here
+        switch ((item.getItemId())){
+            case R.id.dashboardItem:
+                Toast.makeText(this,"Opening Dahsboard, please wait",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.mapItem:
+                //call maps activity
+                Toast.makeText(this,"Opening Maps, please wait.",Toast.LENGTH_SHORT).show();
+                launchMapActivity();
+                break;
+            case R.id.settingsItem:
+                Toast.makeText(this,"Opening Settings, please wait.",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.logoutItem:
+                Toast.makeText(this,"Logging Out, please wait.",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.exitItem:
+                Intent homeIntent=new Intent(Intent.ACTION_MAIN);
+                homeIntent.addCategory(Intent.CATEGORY_HOME);
+                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+                break;
+        }
+        //close navigation drawer
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+    //method to set listener for navigation drawer
+    private void setNavigationViewListener(){
+        NavigationView navigationView=(NavigationView)findViewById(R.id.navigationDrawer);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void launchMapActivity(){
+        Intent intent=new Intent(this,MapsActivity.class);
+        startActivity(intent);
     }
 }

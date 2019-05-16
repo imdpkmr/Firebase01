@@ -24,6 +24,7 @@
         app:itemTextColor="@color/darkgray"
         app:itemIconTint="@color/darkgray"
         app:menu="@menu/drawermenu"
+        android:id="@+id/navigationDrawer"
         android:layout_gravity="start"
         />
 
