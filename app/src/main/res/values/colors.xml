@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#5D4037</color>
     <color name="colorAccent">#143AD6</color>
     <color name="white">#FFFFFF</color>
-    <color name="darkgray">#FF4081</color>
+    <color name="darkgray">#3D3B3B</color>
     <color name="red">#E90000</color>
     <color name="cardBgColor">#A89190</color>
 </resources>
